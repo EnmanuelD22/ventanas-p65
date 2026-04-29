@@ -360,6 +360,26 @@
         .share-btn svg { width: 14px; height: 14px; stroke: currentColor; }
 
 
+
+        /* ── WHATSAPP BUTTON ── */
+        .whatsapp-btn {
+            display: inline-flex; align-items: center; gap: 9px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 13px 24px;
+            border-radius: 50px;
+            font-family: 'Syne', sans-serif;
+            font-size: 14px; font-weight: 700;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+            transition: opacity .15s, transform .1s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .whatsapp-btn:active { opacity: .85; transform: scale(.97); }
+        .footer {
+            padding: 1.5rem 1.25rem 2rem;
+            text-align: center;
+        }
         /* ── ADS ── */
         .ad-unit {
             background: var(--bg3);
@@ -583,9 +603,7 @@
 
     </form>
 
-    <div class="footer">
-        Compartir app: <a href="http://10.0.0.46:5000">http://10.0.0.46:5000</a>
-    </div>
+
 </div>
 
 <script>
@@ -651,6 +669,17 @@
         ta.style.height = 'auto';
         ta.style.height = Math.max(130, ta.scrollHeight) + 'px';
     });
+
+
+    function compartirWhatsApp() {
+        const url = window.location.href.split('?')[0];
+        const msg = encodeURIComponent(
+            '👷 *Ventanas P65* — App para calcular piezas por hueco\n\n' +
+            'Calcula jambas, cabezales, laterales, rieles y vidrios al instante.\n\n' +
+            '🔗 ' + url
+        );
+        window.open('https://wa.me/?text=' + msg, '_blank');
+    }
 
     function insertarTexto(texto) {
         const ta = document.getElementById('huecos');
