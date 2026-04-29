@@ -476,18 +476,10 @@
                 </div>
             </div>
 
-            <div class="stats-strip">
+            <div class="stats-strip" style="grid-template-columns: repeat(2,1fr);">
                 <div class="stat-cell">
                     <div class="stat-lbl">Huecos</div>
                     <div class="stat-val">{{ resultados | length }}</div>
-                </div>
-                <div class="stat-cell">
-                    <div class="stat-lbl">Jamba prom.</div>
-                    <div class="stat-val">
-                        {% set ns = namespace(total=0) %}
-                        {% for r in resultados %}{% set ns.total = ns.total + r.jambas | float %}{% endfor %}
-                        {{ "%.2f" | format(ns.total / resultados | length) }}
-                    </div>
                 </div>
                 <div class="stat-cell">
                     <div class="stat-lbl">Vías</div>
@@ -503,7 +495,6 @@
                             <span class="result-num">#{{ loop.index }}</span>
                             <span class="result-hueco">{{ r.hueco }}</span>
                         </div>
-                        <span class="vid-chip">{{ r.vidrios }}</span>
                     </div>
                     <div class="result-grid">
                         <div class="result-field">
@@ -521,6 +512,10 @@
                         <div class="result-field">
                             <div class="result-field-lbl">Rieles</div>
                             <div class="result-field-val">{{ r.rieles }}</div>
+                        </div>
+                        <div class="result-field" style="grid-column: span 2;">
+                            <div class="result-field-lbl">Vidrios</div>
+                            <div class="result-field-val">{{ r.vidrios }}</div>
                         </div>
                     </div>
                 </div>
