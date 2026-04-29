@@ -357,6 +357,25 @@
         }
         .share-btn.show { display: flex; }
         .share-btn svg { width: 14px; height: 14px; stroke: currentColor; }
+
+        /* ── KEYBOARD HELPER ── */
+        .kbd-row {
+            display: flex; gap: 8px; margin-top: 8px;
+        }
+        .kbd-btn {
+            flex: 1;
+            padding: 11px 6px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: 9px;
+            font-family: 'DM Mono', monospace;
+            font-size: 13px; font-weight: 500;
+            color: var(--accent2);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: background .1s;
+        }
+        .kbd-btn:active { background: var(--accent); color: #fff; }
     </style>
 </head>
 <body>
@@ -426,6 +445,11 @@
                         placeholder="1.50 x 1.20&#10;2.00 x 1.50&#10;0.90 x 1.00"
                         autocomplete="off" autocorrect="off"
                         inputmode="decimal">{{ huecos }}</textarea>
+                    <div class="kbd-row">
+                        <button type="button" class="kbd-btn" onclick="insertarTexto(' x ')">x</button>
+                        <button type="button" class="kbd-btn" onclick="insertarTexto('.')">.</button>
+                        <button type="button" class="kbd-btn" onclick="insertarTexto('\n')">&#8629; nueva línea</button>
+                    </div>
                 </div>
 
                 <div class="err" id="errBox">Revisa el formato: usa "ancho x alto" por línea (ej: 1.50 x 1.20)</div>
@@ -587,6 +611,20 @@
         ta.style.height = 'auto';
         ta.style.height = Math.max(130, ta.scrollHeight) + 'px';
     });
+
+    function insertarTexto(texto) {
+        const ta = document.getElementById('huecos');
+        ta.focus();
+        const start = ta.selectionStart;
+        const end = ta.selectionEnd;
+        const val = ta.value;
+        ta.value = val.substring(0, start) + texto + val.substring(end);
+        const newPos = start + texto.length;
+        ta.selectionStart = newPos;
+        ta.selectionEnd = newPos;
+        ta.style.height = 'auto';
+        ta.style.height = Math.max(130, ta.scrollHeight) + 'px';
+    }
 </script>
 </body>
 </html>
